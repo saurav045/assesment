@@ -2,24 +2,28 @@ package com.ing.assessment.controller;
 
 import static org.junit.Assert.assertFalse;
 
+import org.junit.Before;
 import org.junit.Test;
 
 public class ValidatorControllerTest {
 
-	ValidatorController controller;
+	private ValidatorController controller;
+	
+	@Before
+	public void setup() {
+		controller = new ValidatorController();
+	}
 	
 	@Test
-	public void ValidateVersionWhenNoUrl() {
-		controller = new ValidatorController();
-		boolean isMatched = controller.validate(null);
+	public void ValidateVersionForPcfUrl() {
+		boolean isMatched = controller.validatePcfUrl();
 		assertFalse(isMatched);
 	}
 
 	@Test
-	public void ValidateVersionWhenUrlIsNotEmpty() {
-		controller = new ValidatorController();
-		boolean isMatched = controller.validate("url");
-		assertFalse(!isMatched);
+	public void ValidateVersionForBlueMixUrl() {
+		boolean isMatched = controller.validateBlueMixUrl();
+		assertFalse(isMatched);
 	}
 	
 
