@@ -20,30 +20,28 @@ import com.ing.assessment.model.PCFVersion;
 public class ValidatorController {
 
 	private final String PCF_URL = "https://api.run.pivotal.io/v2/info";
-	private final String PCF_VERSION = "2.63.0";
 	private final String BLUEMIX_URL = "https://api.ng.bluemix.net/v2/info ";
-	private final String BLUEMIX_VERSION = "2.54.0";
 
 	@Bean
 	public RestTemplate restTemplate() {
 		return new RestTemplate();
 	}
 
-	@GetMapping(value = "/version/pcf")
-	public boolean validatePcfUrl() {
+	@GetMapping(value = "/version/pcf/{version}")
+	public boolean validatePcfUrl(@PathVariable String version) {
 		boolean versionMatched = false;
 		PCFVersion versionResponse = restTemplate().getForObject(PCF_URL, PCFVersion.class);
-		if (PCF_VERSION.equals(versionResponse.getApi_version())) {
+		if (versionResponse.getApi_version().equals(version)) {
 			versionMatched = true;
 		}
 		return versionMatched;
 	}
 	
-	@GetMapping(value = "/version/bluemix")
-	public boolean validateBlueMixUrl() {
+	@GetMapping(value = "/version/bluemix/{version}")
+	public boolean validateBlueMixUrl(@PathVariable String version) {
 		boolean versionMatched = false;
 		BlueMixVersion versionResponse = restTemplate().getForObject(BLUEMIX_URL, BlueMixVersion.class);
-		if (BLUEMIX_VERSION.equals(versionResponse.getApi_version())) {
+		if (versionResponse.getApi_version().equals(version)) {
 			versionMatched = true;
 		}
 		return versionMatched;

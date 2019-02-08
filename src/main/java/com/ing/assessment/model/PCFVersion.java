@@ -1,5 +1,7 @@
 package com.ing.assessment.model;
 
+import javax.validation.constraints.NotNull;
+
 public class PCFVersion {
 
 	private String name;
@@ -15,6 +17,7 @@ public class PCFVersion {
 	private String app_ssh_host_key_fingerprint;
 	private String app_ssh_oauth_client;
 	private String doppler_logging_endpoint;
+	@NotNull
 	private String api_version;
 	private String osbapi_version;
 	private String routing_endpoint;
